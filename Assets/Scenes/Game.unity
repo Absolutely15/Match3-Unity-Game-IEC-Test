@@ -1274,6 +1274,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1284129677}
   m_CullTransparentMesh: 0
+--- !u!1 &1430910335
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1430910337}
+  - component: {fileID: 1430910336}
+  m_Layer: 0
+  m_Name: Item Skin Changer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1430910336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430910335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 534caf1376e5d9a438f6013fc3e5a14e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemSkin: {fileID: 11400000, guid: 4f2a3f12a0a905d41b2c5c7d93207ecd, type: 2}
+  itemSkinList:
+  - {fileID: 3753678974122044428, guid: 42636182d7ad561418687da1a9301f13, type: 3}
+  - {fileID: 3753678974122044428, guid: c02be8d33867e784787a1db70d743e36, type: 3}
+  - {fileID: 3753678974122044428, guid: c3334ca92edd09f4b83b6df9783252fa, type: 3}
+  - {fileID: 3753678974122044428, guid: 5ccf5b053fc1fe1499d69d9d384cd695, type: 3}
+  - {fileID: 3753678974122044428, guid: 8a5f83856079b5c4b8a0c1b6bd4a199e, type: 3}
+  - {fileID: 3753678974122044428, guid: acd51b1157b037f478be336b1e22b029, type: 3}
+  - {fileID: 3753678974122044428, guid: 866d4248d2e1fad418c1e4c0566ae0a3, type: 3}
+--- !u!4 &1430910337
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430910335}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!850595691 &1491259499
 LightingSettings:
   m_ObjectHideFlags: 0
