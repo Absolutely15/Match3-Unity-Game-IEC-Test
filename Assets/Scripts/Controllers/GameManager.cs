@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
         MOVES
     }
 
+    private eLevelMode m_levelMode;
+
     public enum eStateGame
     {
         SETUP,
@@ -83,6 +85,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadLevel(eLevelMode mode)
     {
+        m_levelMode = mode;
         m_boardController = new GameObject("BoardController").AddComponent<BoardController>();
         m_boardController.StartGame(this, m_gameSettings);
 
@@ -115,6 +118,12 @@ public class GameManager : MonoBehaviour
             Destroy(m_boardController.gameObject);
             m_boardController = null;
         }
+    }
+
+    internal void RestartLevel()
+    {
+        ClearLevel();
+        LoadLevel(m_levelMode);
     }
 
     private IEnumerator WaitBoardController()
