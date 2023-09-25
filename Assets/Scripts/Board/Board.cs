@@ -24,6 +24,8 @@ public class Board
     private Transform m_root;
 
     private int m_matchMin;
+    
+    private readonly Dictionary<NormalItem.eNormalType, int> itemTypeCount = new Dictionary<NormalItem.eNormalType, int>();
 
     public Board(Transform transform, GameSettings gameSettings)
     {
@@ -74,6 +76,8 @@ public class Board
 
     internal void Fill()
     {
+        itemTypeCount.Clear();
+        
         for (int x = 0; x < boardSizeX; x++)
         {
             for (int y = 0; y < boardSizeY; y++)
@@ -100,9 +104,10 @@ public class Board
                     }
                 }
 
-                item.SetType(Utils.GetRandomNormalTypeExcept(types.ToArray()));
+                item.SetType(Utils.GetRandomNormalTypeExcept(types));
                 item.SetView();
                 item.SetViewRoot(m_root);
+                AddItemType(item);
 
                 cell.Assign(item);
                 cell.ApplyItemPosition(false);
@@ -147,15 +152,77 @@ public class Board
 
                 NormalItem item = new NormalItem();
 
-                item.SetType(Utils.GetRandomNormalType());
+                item.SetType(GetTypeDifferentFromFourSurroundingCells(cell));
                 item.SetView();
                 item.SetViewRoot(m_root);
+                AddItemType(item);
 
                 cell.Assign(item);
                 cell.ApplyItemPosition(true);
             }
         }
     }
+
+    #region Extra function
+    private NormalItem.eNormalType GetTypeDifferentFromFourSurroundingCells(Cell cell)
+    {
+        var types = new List<NormalItem.eNormalType>();
+        if (cell.NeighbourBottom != null)
+        {
+            if (cell.NeighbourBottom.Item is NormalItem nitem)
+            {
+                types.Add(nitem.ItemType);
+            }
+        }
+
+        if (cell.NeighbourLeft != null)
+        {
+            if (cell.NeighbourLeft.Item is NormalItem nitem)
+            {
+                types.Add(nitem.ItemType);
+            }
+        }
+        
+        if (cell.NeighbourRight != null)
+        {
+            if (cell.NeighbourRight.Item is NormalItem nitem)
+            {
+                types.Add(nitem.ItemType);
+            }
+        }
+        
+        if (cell.NeighbourUp != null)
+        {
+            if (cell.NeighbourUp.Item is NormalItem nitem)
+            {
+                types.Add(nitem.ItemType);
+            }
+        }
+
+        var normalTypeExcept = Utils.GetNormalTypeListExcept(types);
+        var minTypeCount = 99;
+        var minType = Utils.GetRandomNormalTypeExcept(types);
+        foreach (var type in normalTypeExcept.Where(type => minTypeCount > itemTypeCount[type]))
+        {
+            minTypeCount = itemTypeCount[type];
+            minType = type;
+        }
+        
+        return minType;
+    }
+
+    private void AddItemType(NormalItem item)
+    {
+        if (!itemTypeCount.ContainsKey(item.ItemType))
+        {
+            itemTypeCount.Add(item.ItemType, 0);
+        }
+
+        itemTypeCount[item.ItemType]++;
+    }
+
+    public void RemoveItemType(NormalItem item) => itemTypeCount[item.ItemType]--;
+    #endregion
 
     internal void ExplodeAllItems()
     {

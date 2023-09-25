@@ -15,7 +15,7 @@ public class Utils
         return result;
     }
 
-    public static NormalItem.eNormalType GetRandomNormalTypeExcept(NormalItem.eNormalType[] types)
+    public static NormalItem.eNormalType GetRandomNormalTypeExcept(List<NormalItem.eNormalType> types)
     {
         List<NormalItem.eNormalType> list = Enum.GetValues(typeof(NormalItem.eNormalType)).Cast<NormalItem.eNormalType>().Except(types).ToList();
 
@@ -23,5 +23,9 @@ public class Utils
         NormalItem.eNormalType result = list[rnd];
 
         return result;
+    }
+    public static List<NormalItem.eNormalType> GetNormalTypeListExcept(List<NormalItem.eNormalType> types)
+    {
+        return Enum.GetValues(typeof(NormalItem.eNormalType)).Cast<NormalItem.eNormalType>().Except(types).ToList();
     }
 }
